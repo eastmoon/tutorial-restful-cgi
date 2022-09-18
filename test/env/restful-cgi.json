@@ -1,0 +1,14 @@
+{
+	"id": "daac95bb-6a07-4329-8eb1-8362217fc799",
+	"name": "restful-cgi",
+	"values": [
+		{
+			"key": "hostURL",
+			"value": "cgi-service",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-09-18T11:12:38.492Z",
+	"_postman_exported_using": "Postman/8.10.0"
+}

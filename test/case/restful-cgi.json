@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "6eb69e0e-186a-4c37-8113-e94e4a9bd34a",
+		"name": "restful-cgi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Read Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"POST RPC method is success\", () => {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"pm.test(\"Response structure is right\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"message\");\r",
+							"})\r",
+							"pm.test(\"Response is success\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson.status).include(\"success\");\r",
+							"    const messageJson = responseJson.message;\r",
+							"    pm.expect(messageJson).to.be.a(\"object\");\r",
+							"    pm.expect(messageJson).haveOwnProperty(\"body\");\r",
+							"    pm.expect(messageJson).haveOwnProperty(\"text\");\r",
+							"    pm.expect(messageJson.body).to.be.a(\"object\");\r",
+							"    pm.expect(messageJson.body).haveOwnProperty(\"req\");\r",
+							"    pm.expect(messageJson.body).haveOwnProperty(\"restful\");\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hostURL}}/rapi/:id/:name?var1=abc&var2=098",
+					"host": [
+						"{{hostURL}}"
+					],
+					"path": [
+						"rapi",
+						":id",
+						":name"
+					],
+					"query": [
+						{
+							"key": "var1",
+							"value": "abc"
+						},
+						{
+							"key": "var2",
+							"value": "098"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1234"
+						},
+						{
+							"key": "name",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"POST RPC method is success\", () => {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"pm.test(\"Response structure is right\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"message\");\r",
+							"})\r",
+							"pm.test(\"Response is success\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson.status).include(\"success\");\r",
+							"    const messageJson = responseJson.message;\r",
+							"    pm.expect(messageJson).to.be.a(\"object\");\r",
+							"    pm.expect(messageJson).haveOwnProperty(\"body\");\r",
+							"    pm.expect(messageJson).haveOwnProperty(\"text\");\r",
+							"    pm.expect(messageJson.body).to.be.a(\"object\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"key1\": \"laks\",\r\n    \"key2\": true,\r\n    \"key3\": 5678\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostURL}}/rapi/:id/:name?var1=abc&var2=098",
+					"host": [
+						"{{hostURL}}"
+					],
+					"path": [
+						"rapi",
+						":id",
+						":name"
+					],
+					"query": [
+						{
+							"key": "var1",
+							"value": "abc"
+						},
+						{
+							"key": "var2",
+							"value": "098"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1234"
+						},
+						{
+							"key": "name",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"POST RPC method is success\", () => {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"pm.test(\"Response structure is right\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"message\");\r",
+							"})\r",
+							"pm.test(\"Response is success\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson.status).include(\"success\");\r",
+							"    const messageJson = responseJson.message;\r",
+							"    pm.expect(messageJson).to.be.a(\"object\");\r",
+							"    pm.expect(messageJson).haveOwnProperty(\"body\");\r",
+							"    pm.expect(messageJson).haveOwnProperty(\"text\");\r",
+							"    pm.expect(messageJson.body).to.be.a(\"object\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"key1\": \"laks\",\r\n    \"key2\": true,\r\n    \"key3\": 5678\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostURL}}/rapi/:id/:name?var1=abc&var2=098",
+					"host": [
+						"{{hostURL}}"
+					],
+					"path": [
+						"rapi",
+						":id",
+						":name"
+					],
+					"query": [
+						{
+							"key": "var1",
+							"value": "abc"
+						},
+						{
+							"key": "var2",
+							"value": "098"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1234"
+						},
+						{
+							"key": "name",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"POST RPC method is success\", () => {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"pm.test(\"Response structure is right\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"message\");\r",
+							"})\r",
+							"pm.test(\"Response is success\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.be.a(\"object\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"status\");\r",
+							"    pm.expect(responseJson.status).include(\"success\");\r",
+							"    pm.expect(responseJson).haveOwnProperty(\"message\");\r",
+							"    pm.expect(responseJson.message).to.be.a(\"string\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{hostURL}}/rapi/:id/:name",
+					"host": [
+						"{{hostURL}}"
+					],
+					"path": [
+						"rapi",
+						":id",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1234"
+						},
+						{
+							"key": "name",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
