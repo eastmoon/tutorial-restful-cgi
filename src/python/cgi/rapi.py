@@ -28,10 +28,10 @@ def parser_restful_info(url):
     url_pattern = r'/(?P<api>\w+)/(?P<id>[0-9]+)/(?P<name>\w+)$'
     return re.match(url_pattern, url).groupdict()
 
-def response( status, body):
+def response(status, message):
     result = {
         "status": status,
-        "message": body
+        "message": message
     }
     print "Content-type: application/json"
     print ""
