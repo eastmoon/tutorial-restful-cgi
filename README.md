@@ -4,10 +4,60 @@ Nginx + CGI 是使用 Perl 建立 Nginx 與 FastCGI 溝通用的 IPC Socket；�
 
 此設計不考慮使用 Python、Perl 相關的服務框架，而是採用 Nginx 完成路由設定，並呼叫對應的 CGI 服務。
 
-測試頁面：
+## 啟動服務
+
+本專案可啟動 Perl、Python 不同語言撰寫的 CGI 服務，啟用方式請使用專案內的控制台命令介面 ( CLI ) ```dockerw.bat``` 檔案
+
++ Perl
+```
+dockerw perl
+```
+
++ Python
+```
+dockerw python
+```
+
+測試業面：
 + [Nginx 首頁](http://localhost/)
 + [index CGI in cgi-bin](http://localhost/cgi-bin)
 + [api.html page call api.pl/api.py](http://localhost/api.html)
+
+## Restful 檢測
+
+### Postman
+
++ 啟動 Python 服務
+```
+dockerw python
+```
+
++ 執行 Postman 服務
+```
+docekrw test
+```
+
+### CURL
+
++ GET
+```
+curl -X GET -v "http://localhost/rapi/1234/root?var1=abc&var2=098"
+```
+
++ POST
+```
+curl -X POST -H "Content-Type: application/json" -d "{\"key1\": \"laks\",\"key2\": true,\"key3\": 5678}" -v "http://localhost/rapi/1234/root?var1=abc&var2=098"
+```
+
++ PUT
+```
+curl -X PUT -H "Content-Type: application/json" -d "{\"key1\": \"laks\",\"key2\": true,\"key3\": 5678}" -v "http://localhost/rapi/1234/root?var1=abc&var2=098"
+```
+
++ DELETE
+```
+curl -X DELETE -v "http://localhost/rapi/1234/root"
+```
 
 ## 文獻
 
