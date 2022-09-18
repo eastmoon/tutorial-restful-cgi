@@ -10,8 +10,10 @@ RUN \
         fcgiwrap
 
 # Install JSON parser
-RUN \
-    echo yes | cpan -i JSON
+RUN echo yes | cpan -i JSON
+
+# Install switch module
+RUN echo yes | cpan -i Switch
 
 # Install c++ library dependency
 ADD ./fcgiwrap /etc/init.d/fcgiwrap
