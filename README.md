@@ -27,8 +27,9 @@ dockerw python
 
 ### Postman
 
-+ 啟動 Python 服務
++ 啟動 Perl 或 Python 服務
 ```
+dockerw perl
 dockerw python
 ```
 
