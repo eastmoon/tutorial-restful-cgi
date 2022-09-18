@@ -4,6 +4,11 @@ Nginx + CGI 是使用 Perl 建立 Nginx 與 FastCGI 溝通用的 IPC Socket；�
 
 此設計不考慮使用 Python、Perl 相關的服務框架，而是採用 Nginx 完成路由設定，並呼叫對應的 CGI 服務。
 
+測試頁面：
++ [Nginx 首頁](http://localhost/)
++ [index CGI in cgi-bin](http://localhost/cgi-bin)
++ [api.html page call api.pl/api.py](http://localhost/api.html)
+
 ## 文獻
 
 + [Common Gateway Interface wiki](https://zh.wikipedia.org/zh-tw/%E9%80%9A%E7%94%A8%E7%BD%91%E5%85%B3%E6%8E%A5%E5%8F%A3)
