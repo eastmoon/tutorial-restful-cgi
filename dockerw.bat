@@ -47,9 +47,6 @@ for %%a in ("%cd%") do (
     set PROJECT_NAME=%%~na
 )
 set PROJECT_ENV=dev
-set VARNUMBER1=0
-set VARNUMBER2=0
-set VARTEST=0
 
 :: ------------------- execute script -------------------
 
@@ -140,6 +137,23 @@ goto end
 
 :: ------------------- Common Command method -------------------
 
+:create-docker-network (
+    docker network ls > .tmp
+    docker run -ti --rm -v %CLI_DIRECTORY%\.tmp:/.tmp bash -l -c "cat /.tmp | grep %PROJECT_NAME%-network | wc -l" > .flag
+    set /p is_create=<.flag
+    if "%is_create%" == "0" (
+        docker network create %PROJECT_NAME%-network
+    ) else (
+        echo "Netwwork %PROJECT_NAME%-network is exist."
+    )
+    if exist .tmp (
+        del .tmp
+    )
+    if exist .flag (
+        del .flag
+    )
+    goto end
+)
 :remove-container (
     docker rm -f restful-cgi-%PROJECT_NAME%
     goto end
@@ -153,12 +167,15 @@ goto end
         -t nginx:pl-%PROJECT_NAME%^
         .\conf\perl
     call :remove-container
+    call :create-docker-network
     if NOT "%COMMAND_ACTION%"=="down" (
         docker run -d ^
             -p 80:80 ^
             -v %cd%\src/perl/cgi:/usr/share/nginx/html/cgi-bin ^
             -v %cd%\src/perl/html:/usr/share/nginx/html ^
             -w /usr/share/nginx/html/cgi-bin ^
+            --network %PROJECT_NAME%-network ^
+            --hostname cgi-service ^
             --name restful-cgi-%PROJECT_NAME% ^
             nginx:pl-%PROJECT_NAME%
     )
@@ -196,12 +213,15 @@ goto end
         -t nginx:py-%PROJECT_NAME%^
         .\conf\python
     call :remove-container
+    call :create-docker-network
     if NOT "%COMMAND_ACTION%"=="down" (
         docker run -d ^
             -p 80:80 ^
             -v %cd%\src/python/cgi:/usr/share/nginx/html/cgi-bin ^
             -v %cd%\src/python/html:/usr/share/nginx/html ^
             -w /usr/share/nginx/html/cgi-bin ^
+            --network %PROJECT_NAME%-network ^
+            --hostname cgi-service ^
             --name restful-cgi-%PROJECT_NAME% ^
             nginx:py-%PROJECT_NAME%
     )
