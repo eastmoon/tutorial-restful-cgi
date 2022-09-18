@@ -251,6 +251,38 @@ goto end
     goto end
 )
 
+:: ------------------- Command "test" method -------------------
+
+:cli-test (
+    call :create-docker-network
+    docker run -ti --rm ^
+        --network tutorial-restful-cgi-network ^
+        -v %cd%\test:/app ^
+        postman/newman:alpine run ^
+            "/app/case/restful-cgi.json" ^
+            -e "/app/env/restful-cgi.json" ^
+            --insecure ^
+            -r cli
+    goto end
+)
+
+:cli-test-args (
+    set COMMON_ARGS_KEY=%1
+    set COMMON_ARGS_VALUE=%2
+    if "%COMMON_ARGS_KEY%"=="--into" (set COMMAND_ACTION=into)
+    goto end
+)
+
+:cli-test-help (
+    echo This is a Command Line Interface with project %PROJECT_NAME%
+    echo Startup development mode with Nginx + FastCGI + Python
+    echo.
+    echo Options:
+    echo      --help, -h        Show more information with UP Command.
+    echo      --into            Going to container.
+    goto end
+)
+
 :: ------------------- End method-------------------
 
 :end (
