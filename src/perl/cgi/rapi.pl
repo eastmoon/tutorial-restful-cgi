@@ -25,10 +25,15 @@ sub parser_request_info {
     return \%req
 }
 
-sub parser_restful_info{
+sub parser_restful_info {
+    my($url) = @_;
     # Regex for get the related fields from URL
-    #url_pattern = r'/(?P<api>\w+)/(?P<id>[0-9]+)/(?P<name>\w+)$'
-    %re = ();
+    $url =~ m/(\w+)\/(\w+)\/(\w+)/;
+    %re = (
+        "api"=>$1,
+        "id"=>$2,
+        "name"=>$3
+    );
     return \%re;
 }
 
@@ -80,7 +85,7 @@ sub call_del {
 # Execute script
 $req = &parser_request_info();
 %info = (
-    "restful"=>&parser_restful_info(),
+    "restful"=>&parser_restful_info($req{"SCRIPT_NAME"}),
     "req"=>$req
 );
 switch($req{"REQUEST_METHOD"}) {
